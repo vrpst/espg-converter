@@ -1,0 +1,6 @@
+# EPSG 4326 to 27700 (British National Grid) GeoJSON converter
+This is a spinoff of a converter I wrote for [Octolamp](https://github.com/vrpst/octolamp) — while most British Government GeoJSON data is published using the EPSG:27700 format, some is published using EPSG:4326, and needs to be converted to the former. This project uses [geodesy](https://github.com/chrisveness/geodesy) and fs. 
+
+If you want to convert Northern Ireland data, you will need to go into `node_modules` and comment out lines 64 and 65 of `osgridref.js`. This is because some coordinates will yield a negative number, which would cause the module to throw an error. In real terms, these negative grid references do not exist, but it doesn't matter if you're just creating vector projections (as I am).
+
+Put all your input files in `./if`, and they will be exported to `./of`. You will need to modify the arrays `ifn` and `ofn` in `server.js` to reflect the input and output names of all files, respectively. The program will then interate through them.
